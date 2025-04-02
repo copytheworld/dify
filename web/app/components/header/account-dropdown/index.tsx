@@ -33,12 +33,8 @@ import { LanguagesSupported } from '@/i18n/language'
 import { LicenseStatus } from '@/types/feature'
 import { IS_CLOUD_EDITION } from '@/config'
 import cn from '@/utils/classnames'
-import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 
 export default function AppSelector() {
-  const media = useBreakpoints()
-  const isMobile = media === MediaType.mobile
-
   const itemClassName = `
     flex items-center w-full h-9 pl-3 pr-2 text-text-secondary system-md-regular
     rounded-lg hover:bg-state-base-hover cursor-pointer gap-1
