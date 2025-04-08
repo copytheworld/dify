@@ -22,6 +22,7 @@ import { varTypeToStructType } from './utils'
 import type { Field } from '@/app/components/workflow/nodes/llm/types'
 import { FILE_STRUCT } from '@/app/components/workflow/constants'
 import { Loop } from '@/app/components/base/icons/src/vender/workflow'
+import { noop } from 'lodash-es'
 
 type ObjectChildrenProps = {
   nodeId: string
@@ -46,6 +47,8 @@ type ItemProps = {
   isException?: boolean
   isLoopVar?: boolean
 }
+
+const objVarTypes = [VarType.object, VarType.file]
 
 const Item: FC<ItemProps> = ({
   nodeId,
@@ -130,7 +133,7 @@ const Item: FC<ItemProps> = ({
   return (
     <PortalToFollowElem
       open={open}
-      onOpenChange={() => { }}
+      onOpenChange={noop}
       placement='left-start'
     >
       <PortalToFollowElemTrigger className='w-full'>
@@ -196,7 +199,7 @@ const ObjectChildren: FC<ObjectChildrenProps> = ({
   isSupportFileVar,
 }) => {
   const currObjPath = objPath
-  const itemRef = useRef(null)
+  const itemRef = useRef<HTMLDivElement>(null)
   const [isItemHovering, setIsItemHovering] = useState(false)
   const _ = useHover(itemRef, {
     onChange: (hovering) => {
