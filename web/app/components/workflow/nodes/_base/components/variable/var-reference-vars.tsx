@@ -92,7 +92,7 @@ const Item: FC<ItemProps> = ({
     return objStructuredOutput
   })()
 
-  const itemRef = useRef(null)
+  const itemRef = useRef<HTMLDivElement>(null)
   const [isItemHovering, setIsItemHovering] = useState(false)
   const _ = useHover(itemRef, {
     onChange: (hovering) => {
