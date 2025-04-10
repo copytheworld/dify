@@ -130,19 +130,18 @@ export const getMarketplaceListFilterType = (category: string) => {
 export const updateSearchParams = (pluginsSearchParams: PluginsSearchParams) => {
   const { query, category, tags } = pluginsSearchParams
   const url = new URL(window.location.href)
+  const categoryChanged = url.searchParams.get('category') !== category
   if (query)
     url.searchParams.set('q', query)
   else
     url.searchParams.delete('q')
-  if (category && category !== PLUGIN_TYPE_SEARCH_MAP.all)
+  if (category)
     url.searchParams.set('category', category)
-  else if (!category)
-    url.searchParams.delete('category')
   else
-    url.searchParams.set('category', 'discover')
+    url.searchParams.delete('category')
   if (tags && tags.length)
     url.searchParams.set('tags', tags.join(','))
   else
     url.searchParams.delete('tags')
-  history.replaceState({}, '', url)
+  history[`${categoryChanged ? 'pushState' : 'replaceState'}`]({}, '', url)
 }
